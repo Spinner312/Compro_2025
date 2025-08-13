@@ -22,6 +22,20 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 }
 
+// BLOGS (hanya yang publish)
+$queryBlogs = mysqli_query(
+    $koneksi,
+    "SELECT b.id, b.title, b.content, b.image, b.created_at,
+          c.name AS category_name
+   FROM blogs b
+   LEFT JOIN categories c ON c.id = b.id_category
+   WHERE b.is_active = 1
+   ORDER BY b.id DESC
+   LIMIT 6"
+);
+$rowBlogs = mysqli_fetch_all($queryBlogs, MYSQLI_ASSOC);
+
+
 ?>
 
 <!DOCTYPE html>
