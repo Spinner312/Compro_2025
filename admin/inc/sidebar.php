@@ -25,8 +25,8 @@
                     </a>
                 </li>
                 <li>
-                    <a href="?page=clients">
-                        <i class="bi bi-circle"></i><span>clients</span>
+                    <a href="?page=client">
+                        <i class="bi bi-circle"></i><span>Clients</span>
                     </a>
                 </li>
                 <li>
@@ -98,7 +98,7 @@
         </li><!-- End Profile Page Nav -->
 
         <li class="nav-item">
-            <a class="nav-link collapsed" href="?page=settings">
+            <a class="nav-link collapsed" href="?page=setting">
                 <i class="bi bi-gear"></i>
                 <span>Setting</span>
             </a>

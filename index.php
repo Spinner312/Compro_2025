@@ -9,10 +9,10 @@ $rowSetting = mysqli_fetch_assoc($querySetting);
 $querySliders = mysqli_query($koneksi, "SELECT * FROM sliders ORDER BY id DESC");
 $rowSliders = mysqli_fetch_all($querySliders, MYSQLI_ASSOC);
 
-$queryAbouts = mysqli_query($koneksi, "SELECT * FROM about ORDER BY id DESC");
+$queryAbouts = mysqli_query($koneksi, "SELECT * FROM about WHERE is_active ORDER BY id DESC");
 $rowAbouts = mysqli_fetch_all($queryAbouts, MYSQLI_ASSOC);
 
-$queryClients = mysqli_query($koneksi, "SELECT * FROM clients ORDER BY id DESC");
+$queryClients = mysqli_query($koneksi, "SELECT * FROM client WHERE is_active ORDER BY id DESC");
 $rowClients = mysqli_fetch_all($queryClients, MYSQLI_ASSOC);
 
 ?>
@@ -62,31 +62,16 @@ $rowClients = mysqli_fetch_all($queryClients, MYSQLI_ASSOC);
     <main class="main">
 
         <?php
-
-        $page = isset($_GET['page']) ? $_GET['page'] : 'home';
-
-        // Sanitasi sederhana biar aman dari path traversal
-        $page = preg_replace('/[^a-zA-Z0-9_-]/', '', $page);
-
-        $phpPath  = "content/{$page}.php";
-        $htmlPath = "content/{$page}.html";
-
-        if (file_exists($phpPath)) {
-            include $phpPath;
-        } elseif (file_exists($htmlPath)) {
-            include $htmlPath;
-        } else {
-            // fallback aman kalau notfound.php belum ada
-            if (file_exists('content/notfound.php')) {
-                include 'content/notfound.php';
+        if (isset($_GET['page'])) {
+            if (file_exists('content/' . $_GET['page'] . ".php")) {
+                include 'content/' . $_GET['page'] . '.php';
             } else {
-                http_response_code(404);
-                echo "<h1>404 - Halaman tidak ditemukan</h1>";
+                include 'content/notfound.php';
             }
+        } else {
+            include 'content/home.php';
         }
-
         ?>
-
 
     </main>
 
